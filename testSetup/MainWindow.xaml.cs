@@ -13,6 +13,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Diagnostics;
+using System.IO.Compression;
+using System.Net;
+
 
 namespace testSetup
 {
@@ -33,16 +36,16 @@ namespace testSetup
             {
                 MessageBox.Show("Installation de VirtualBox terminée. Lancement de l'importation de la VM OpenERP.");
             }
-            else 
+            else
             {
-                MessageBox.Show("Erreur lors de l'installation de virtuaBox...");
+                MessageBox.Show("Erreur lors de l'installation de virtualBox...");
             }
-
+            //je change petit
             //importation de la VM OpenERP
             //et installation des extensions
             if (ImportVM())
             {
-                MessageBox.Show("Importation de la VM OpeERP terminée. Lancement de l'installation des extensions");
+                MessageBox.Show("Importation de la VM OpenERP terminée. Lancement de l'installation des extensions");
             }
             else
             {
@@ -60,11 +63,14 @@ namespace testSetup
             }
 
             //installation de PgAdmin
-            if(InstallPgAdmin())
+            if (InstallPgAdmin())
             {
-
+                MessageBox.Show("Installation de PgAdmin terminée.");
             }
-
+            else
+            {
+                MessageBox.Show("Erreur lors de l'installation de PgAdmin...");
+            }
 
 
         }
@@ -96,7 +102,7 @@ namespace testSetup
             }
             else
             {
-               // MessageBox.Show("archi 32");
+                // MessageBox.Show("archi 32");
                 leMsi = "VirtualBox-4.3.0-r89960-MultiArch_x86.msi";
             }
 
@@ -111,7 +117,7 @@ namespace testSetup
             //execution du programme msiexec
             //String cheminMsiExec = Environment.GetEnvironmentVariable("WINDIR") + "/System32/msiexec.exe";
             //ExecuteExe(cheminMsiExec, cheminExec, " /i " + leMsi + " APPLOCAL=VBoxApploication,VBoxUSB,VBoxNetwork /qb");
-            //remarque : l'option n pour ne pas avoir d'interface utilisateur à l'instalation ne fonctionne pas...
+            //remarque : l'option n pour ne pas avoir d'interface utilisateur à l'installation ne fonctionne pas...
 
             //MessageBox.Show("terminé");
             return true;
@@ -123,15 +129,18 @@ namespace testSetup
         //    //installation du pack extension
         //    string cheminVBoxManage = Environment.GetEnvironmentVariable("PROGRAMFILES") + "/Oracle/VirtualBox/VBoxManage.exe";
         //    ExecuteExe(cheminVBoxManage, cheminRessources, "extpack install Oracle_VM_VirtualBox_Extension_Pack-4.3.0-89960.vbox-extpack");
-           
+
         //    return true;
         //}
 
         private Boolean InstallGuestAdd()
         {
             string cheminRessources = Environment.GetEnvironmentVariable("HOMEPATH") + "/Desktop/ressourcesOpenERP";
+            string zipPath = cheminRessources + "/VBoxGuestAdditions.iso";
+            //Decompression de VBoxGuestAdditions.iso
+            ZipFile.ExtractToDirectory(zipPath, cheminRessources + "/");
             //installation des guest additions
-            //Le repertoire VBoxGuestAddition est obtenu en desarchivant le VBoxGuestAdditions.iso (automatiser cela ?? ...)
+            //Le repertoire VBoxGuestAddition est obtenu en desarchivant le VBoxGuestAdditions.iso (automatiser cela ?? ...) 
             ExecuteExe(cheminRessources + "/VBoxGuestAdditions/VBoxWindowsAdditions.exe", cheminRessources + "/VBoxGuestAdditions", "/S");
 
             return true;
@@ -147,7 +156,7 @@ namespace testSetup
 
             //installation du pack extension
             ExecuteExe(cheminVBoxManage, cheminRessources, "extpack install Oracle_VM_VirtualBox_Extension_Pack-4.3.0-89960.vbox-extpack");
-           
+
             return true;
         }
 
@@ -155,7 +164,7 @@ namespace testSetup
         {
             string cheminPg = Environment.GetEnvironmentVariable("HOMEPATH") + "/Desktop/ressourcesOpenERP/pgadmin";
             ExecuteExe(cheminPg, cheminPg + "/pgadmin3", "");
-           
+
             return true;
         }
 

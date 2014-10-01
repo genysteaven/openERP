@@ -49,7 +49,7 @@ namespace testSetup
             }
             else
             {
-                MessageBox.Show("Erreur lors de l'installation de virtuaBox...");
+                MessageBox.Show("Erreur lors de l'importation de la vm OpenERP...");
             }
 
             //installation des guestAdditions
@@ -59,7 +59,7 @@ namespace testSetup
             }
             else
             {
-                MessageBox.Show("Erreur lors de l'installation de virtuaBox...");
+                MessageBox.Show("Erreur lors de l'installation des outils complémentaires...");
             }
 
             //installation de PgAdmin
@@ -115,8 +115,8 @@ namespace testSetup
             ExecuteExe(cheminVBox, cheminExec, "-s");
 
             //execution du programme msiexec
-            //String cheminMsiExec = Environment.GetEnvironmentVariable("WINDIR") + "/System32/msiexec.exe";
-            //ExecuteExe(cheminMsiExec, cheminExec, " /i " + leMsi + " APPLOCAL=VBoxApploication,VBoxUSB,VBoxNetwork /qb");
+            String cheminMsiExec = Environment.GetEnvironmentVariable("WINDIR") + "/System32/msiexec.exe";
+            ExecuteExe(cheminMsiExec, cheminExec, " /i " + leMsi + " APPLOCAL=VBoxApploication,VBoxUSB,VBoxNetwork /qb");
             //remarque : l'option n pour ne pas avoir d'interface utilisateur à l'installation ne fonctionne pas...
 
             //MessageBox.Show("terminé");

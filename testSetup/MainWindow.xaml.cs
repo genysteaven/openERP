@@ -184,5 +184,15 @@ namespace testSetup
             Process leProcessus = Process.Start(psi);
             leProcessus.WaitForExit();
         }
+
+        private void bt_afficherIp_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void bt_desinstaller_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

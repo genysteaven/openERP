@@ -40,7 +40,7 @@ namespace testSetup
             {
                 MessageBox.Show("Erreur lors de l'installation de virtualBox...");
             }
-
+            //je change
             //importation de la VM OpenERP
             //et installation des extensions
             if (ImportVM())

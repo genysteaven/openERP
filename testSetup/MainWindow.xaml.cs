@@ -28,7 +28,7 @@ namespace testSetup
 
         private void bt_start_Click(object sender, RoutedEventArgs e)
         {
-            //ceci est un test de la mortt
+            //ceci est un test de la mortt 2
             //installation de VirtualBox 
             if (InstallVBox())
             {
